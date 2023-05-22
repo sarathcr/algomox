@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './modules/auth/guard/auth.guard';
 import { DashboardComponent } from './modules/shared/containers/dashboard/dashboard.component';
 import { SharedComponent } from './modules/shared/shared.component';
 
@@ -14,21 +13,19 @@ const routes: Routes = [
   {
     path: '',
     component: SharedComponent,
-    
+
     children: [
       {
         path: 'dashboard',
-      //  canActivate: [AuthGuard],
+        //  canActivate: [AuthGuard],
         component: DashboardComponent,
-      }
-      
+      },
     ],
   },
-
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

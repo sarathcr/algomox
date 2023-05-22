@@ -1,23 +1,56 @@
+<div class="d-flex justify-content-end mb-4">
+  <form class="me-3" [formGroup]="fGroup" (submit)="onSearchData()">
+    <div class="d-flex">
+      <div class="input-group me-1">
+        <input
+          type="text"
+          class="form-control position-relative"
+          formControlName="search"
+          placeholder="Search "
+          aria-label="Search"
+          aria-describedby="basic-addon1"
+          [ngClass]="
+            fGroup.get('search')?.invalid && fGroup.controls['search'].touched
+              ? 'border border-danger'
+              : null
+          "
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+  <button type="button" class="btn btn-primary" (click)="createTask()">
+    Create
+  </button>
+</div>
 <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Title</th>
-        <th scope="col">Description</th>
-        <th scope="col">Due date</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of data;let i = index">
-        <th scope="row">{{i+1}}</th>
-        <td>{{item?.title}}</td>
-        <td>{{item?.description}}</td>
-        <td>{{item?.dueDate}}</td>
-        <td><div class="d-flex align-items-center">
-          <i class="bi bi-pencil-square me-4 cursor-pointer" (click)="onEditItem(item)"></i><i class="bi bi-trash-fill p-2 cursor-pointer" (click)="onDeleteItem(item)"></i>
-        </div></td>
-      </tr>
-      
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Due date</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ item?.title }}</td>
+      <td>{{ item?.description }}</td>
+      <td>{{ item?.dueDate }}</td>
+      <td>
+        <div class="d-flex align-items-center">
+          <i
+            class="bi bi-pencil-square me-4 cursor-pointer"
+            (click)="onEditItem(item)"
+          ></i
+          ><i
+            class="bi bi-trash-fill p-2 cursor-pointer"
+            (click)="onDeleteItem(item)"
+          ></i>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

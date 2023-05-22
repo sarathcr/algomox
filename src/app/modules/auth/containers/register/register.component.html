@@ -1,26 +1,91 @@
-
-
 <app-auth-layout>
-    
-    <form class="register w-100" [formGroup]="fGroup" (submit)="onSubmit()">
-        <div class="register__error text-danger border border-danger p-3 mb-4" *ngIf="error"> {{error}} </div>
-        <h4 class="fw-semi-bold mb-4">Register</h4>
-        <div class="form-floating mb-4">
-            <input type="email" class="form-control position-relative" [ngClass]="fGroup.get('name')?.invalid && fGroup.controls['name'].touched ? 'border border-danger': null" id="floatingInputname" placeholder="example" formControlName="name" >
-            <label for="floatingInput">Name</label>
-            <div class="register__error text-danger position-absolute bottom-1 left-0" *ngIf="fGroup.get('name')?.invalid && fGroup.controls['name'].touched"> Field is required </div>
-          </div>
-        <div class="form-floating mb-4">
-            <input type="email" class="form-control position-relative" id="floatingInputemail" [ngClass]="fGroup.get('email')?.invalid && fGroup.controls['email'].touched ? 'border border-danger': null" placeholder="name@example.com" formControlName="email" required>
-            <label for="floatingInput">Email address</label>
-            <div class="register__error text-danger position-absolute bottom-1 left-0" *ngIf="fGroup.get('email')?.invalid && fGroup.controls['email'].touched"> Field is required and should be a valid email </div>
-          </div>
-          <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" [ngClass]="fGroup.get('password')?.invalid && fGroup.controls['password'].touched ? 'border border-danger': null" placeholder="Password" formControlName="password" required>
-            <label for="floatingPassword">Password</label>
-            <div class="register__error text-danger position-absolute bottom-1 left-0" *ngIf="fGroup.get('password')?.invalid && fGroup.controls['password'].touched"> Field is required & must have atleast 4 characters </div>
-          </div>
-          <button type="submit" class="btn btn-primary mt-4 w-100 p-3" [disabled]="fGroup.invalid">Register</button>
-          <div class="mt-2">Already registered? <span class="text-primary register__link" routerLink="/auth/login">Login here</span></div>
-    </form>
+  <form class="register w-100" [formGroup]="fGroup" (submit)="onSubmit()">
+    <div
+      class="register__error text-danger border border-danger p-3 mb-4"
+      *ngIf="error"
+    >
+      {{ error }}
+    </div>
+    <h4 class="fw-semi-bold mb-4">Register</h4>
+    <div class="form-floating mb-4">
+      <input
+        type="email"
+        class="form-control position-relative"
+        [ngClass]="
+          fGroup.get('name')?.invalid && fGroup.controls['name'].touched
+            ? 'border border-danger'
+            : null
+        "
+        id="floatingInputname"
+        placeholder="example"
+        formControlName="name"
+      />
+      <label for="floatingInput">Name</label>
+      <div
+        class="register__error text-danger position-absolute bottom-1 left-0"
+        *ngIf="fGroup.get('name')?.invalid && fGroup.controls['name'].touched"
+      >
+        Field is required
+      </div>
+    </div>
+    <div class="form-floating mb-4">
+      <input
+        type="email"
+        class="form-control position-relative"
+        id="floatingInputemail"
+        [ngClass]="
+          fGroup.get('email')?.invalid && fGroup.controls['email'].touched
+            ? 'border border-danger'
+            : null
+        "
+        placeholder="name@example.com"
+        formControlName="email"
+        required
+      />
+      <label for="floatingInput">Email address</label>
+      <div
+        class="register__error text-danger position-absolute bottom-1 left-0"
+        *ngIf="fGroup.get('email')?.invalid && fGroup.controls['email'].touched"
+      >
+        Field is required and should be a valid email
+      </div>
+    </div>
+    <div class="form-floating">
+      <input
+        type="password"
+        class="form-control"
+        id="floatingPassword"
+        [ngClass]="
+          fGroup.get('password')?.invalid && fGroup.controls['password'].touched
+            ? 'border border-danger'
+            : null
+        "
+        placeholder="Password"
+        formControlName="password"
+        required
+      />
+      <label for="floatingPassword">Password</label>
+      <div
+        class="register__error text-danger position-absolute bottom-1 left-0"
+        *ngIf="
+          fGroup.get('password')?.invalid && fGroup.controls['password'].touched
+        "
+      >
+        Field is required & must have atleast 4 characters
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary mt-4 w-100 p-3"
+      [disabled]="fGroup.invalid"
+    >
+      Register
+    </button>
+    <div class="mt-2">
+      Already registered?
+      <span class="text-primary register__link" routerLink="/auth/login"
+        >Login here</span
+      >
+    </div>
+  </form>
 </app-auth-layout>

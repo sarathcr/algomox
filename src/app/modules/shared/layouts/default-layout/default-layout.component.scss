@@ -1,18 +1,17 @@
-.default-layout{
-    &__nav{
-        
-        flex: 0 0 20%;
-        &-link{
-            cursor: pointer;
-        }
+.default-layout {
+  &__nav {
+    flex: 0 0 20%;
+    &-link {
+      cursor: pointer;
     }
-    &__items{
-        height: 100vh;
+  }
+  &__items {
+    height: 100vh;
+  }
+  &__user {
+    &-name,
+    &-email {
+      width: 80%;
     }
-    &__user{
-        &-name,&-email{
-            width: 80%;
-        }
-        
-    }
+  }
 }

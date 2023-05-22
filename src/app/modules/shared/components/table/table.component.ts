@@ -1,24 +1,51 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { TaskData, TaskResponse } from '../../models/task.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { TaskResponse } from '../../models/task.model';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
 })
-export class TableComponent {
-@Input() data:any;
-@Output() onEdit = new EventEmitter();
-@Output() onDelete = new EventEmitter();
+export class TableComponent implements OnInit {
+  public fGroup!: FormGroup;
 
-public onEditItem(item:TaskResponse){
-  console.log(item)
-  this.onEdit.emit(item)
+  // Input decorators here
+  @Input() data: any;
 
-}
-public onDeleteItem(item:TaskResponse){
-  console.log(item)
-  this.onDelete.emit(item)
+  // Output decorators here
+  @Output() onEdit = new EventEmitter();
+  @Output() onDelete = new EventEmitter();
+  @Output() onCreate = new EventEmitter();
+  @Output() onSearch = new EventEmitter();
 
-}
+  constructor(private formBuilder: FormBuilder) {}
+
+  // Onint lifecycle hook, define form instances here
+  ngOnInit(): void {
+    this.fGroup = this.formBuilder.group({
+      search: '',
+    });
+  }
+
+  // Emit edit event
+  public onEditItem(item: TaskResponse) {
+    this.onEdit.emit(item);
+  }
+
+  // Emit delete event
+  public onDeleteItem(item: TaskResponse) {
+    this.onDelete.emit(item);
+  }
+
+  // Emit create event
+  public createTask() {
+    this.onCreate.emit();
+  }
+
+  // Emit search event
+  public onSearchData() {
+    const searchData = this.fGroup.getRawValue();
+    this.onSearch.emit(searchData.search);
+  }
 }

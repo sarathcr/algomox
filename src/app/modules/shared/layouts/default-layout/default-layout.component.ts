@@ -1,29 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/modules/auth/services/auth-service.service';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
-import { AuthService } from 'src/app/modules/auth/services/auth-service.service';
-import { Route, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-default-layout',
   templateUrl: './default-layout.component.html',
-  styleUrls: ['./default-layout.component.scss']
+  styleUrls: ['./default-layout.component.scss'],
 })
-export class DefaultLayoutComponent implements OnInit {
-  public userData!: User
-  public error!: string
-  constructor(private userServie: UserService, private authService:AuthService, public router:Router){
-
+export class DefaultLayoutComponent implements OnInit, OnDestroy {
+  public userData!: User;
+  public error!: string;
+  private subs = new Subscription();
+  constructor(
+    private userServie: UserService,
+    private authService: AuthService,
+    public router: Router
+  ) {}
+  ngOnInit() {
+    this.subs.add(
+      this.userServie.getUser().subscribe(
+        (res: User) => {
+          this.userData = res;
+        },
+        (err: string) => (this.error = err)
+      )
+    );
   }
-  ngOnInit(){
-    this.userServie.getUser().subscribe((res:User) => {
-      this.userData = res
-    },(err:string)=> this.error = err)
-  }
 
-  public logout(){
-this.authService.logout().subscribe((res)=> {this.router.navigate(['/auth/login'])}
-,(err)=> console.log(err)
-)
+  public logout() {
+    this.subs.add(
+      this.authService.logout().subscribe(
+        (res) => {
+          this.router.navigate(['/auth/login']);
+        },
+        (err) => console.log(err)
+      )
+    );
+  }
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 }
