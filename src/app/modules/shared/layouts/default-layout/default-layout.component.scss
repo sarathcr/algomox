@@ -1,3 +1,4 @@
+@import "node_modules/bootstrap/scss/bootstrap.scss";
 .default-layout {
   &__nav {
     flex: 0 0 20%;
@@ -12,6 +13,11 @@
     &-name,
     &-email {
       width: 80%;
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    &__items {
+      height: auto;
     }
   }
 }
