@@ -1,0 +1,29 @@
+
+
+<div class="default-layout d-flex">
+    <nav class="navbar navbar-expand-lg bg-light p-0 default-layout__nav shadow">
+        <div class="d-flex flex-column w-100 p-4 justify-content-between default-layout__items">
+            <div>
+      <div class="navbar-brand p-2 mx-0 default-layout__user border-b-1" *ngIf="userData"><div class="fs-4 mb-1 default-layout__user-name">{{userData.name}}</div><div class="default-layout__user-email fs-6 text-truncate">{{userData.email}}</div></div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse mt-3" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column">
+          <li class="nav-item">
+            <a class="nav-link default-layout__nav-link" aria-current="page"><i class="bi bi-speedometer2"></i><span class="ms-2">Dashboard</span></a>
+          </li>
+          
+         
+        </ul>
+    </div>
+      
+      </div>
+        <a class="nav-link default-layout__nav-link" (click)="logout()"><i class="bi bi-box-arrow-right"></i><span class="ms-2">Logout</span></a>
+      </div>
+    
+  </nav>
+  <div class="default-layout__content flex-grow-1 p-5">
+    <ng-content></ng-content>
+  </div>
+</div>

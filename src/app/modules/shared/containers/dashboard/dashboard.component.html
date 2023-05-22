@@ -1,0 +1,44 @@
+<div class="dashboard">
+<h3 class="mb-3">Tasks</h3>
+<div class="dashboard__table_empty d-flex flex-column align-items-center justify-content-center" *ngIf="!taskData else tasktable">
+<p>
+    No tasks found
+</p>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTasksModal" >Create</button>
+</div>
+<ng-template #tasktable><app-table [data]="taskData" (onDelete)="onDelete($event)"></app-table></ng-template>
+</div>
+<ng-template #createTasksModal>
+<div class="modal fade" id="createTasksModal" tabindex="-1" aria-labelledby="createTasksModal" aria-hidden="true" >
+    <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createTask">Add task details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="register w-100" [formGroup]="fGroup" (submit)="onCreateTask()">
+                <div class="form-floating mb-4">
+                    <input type="email" class="form-control position-relative" [ngClass]="fGroup.get('title')?.invalid && fGroup.controls['title'].touched ? 'border border-danger': null" id="floatingInputname" placeholder="example" formControlName="title" >
+                    <label for="floatingInput">Title</label>
+                    <div class="register__error text-danger position-absolute bottom-1 left-0" *ngIf="fGroup.get('title')?.invalid && fGroup.controls['title']?.touched"> Field is required </div>
+                  </div>
+                <div class="form-floating mb-4">
+                    <textarea type="email" class="form-control position-relative" id="description" [ngClass]="fGroup.get('description')?.invalid && fGroup.controls['description'].touched ? 'border border-danger': null" placeholder="name@example.com" formControlName="description" required></textarea>
+                    <label for="floatingInput">Description</label>
+                    <div class="register__error text-danger position-absolute bottom-1 left-0" *ngIf="fGroup.get('description')?.invalid && fGroup.controls['description']?.touched"> Field is required </div>
+                  </div>
+                  <div class="form-floating">
+                    <input type="date" class="form-control" id="dueDate" [ngClass]="fGroup.get('dueDate')?.invalid && fGroup.controls['dueDate'].touched ? 'border border-danger': null" placeholder="Password" formControlName="dueDate" required>
+                    <label for="floatingPassword">Due Date</label>
+                    <div class="register__error text-danger position-absolute bottom-1 left-0" *ngIf="fGroup.get('dueDate')?.invalid && fGroup.controls['dueDate']?.touched"> Field is required & must have atleast 4 characters </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary mt-4 w-100 p-3" [disabled]="fGroup.invalid" data-bs-dismiss="modal">Create Task</button>
+                  
+            </form>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</ng-template>
